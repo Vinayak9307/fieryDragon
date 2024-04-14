@@ -57,7 +57,7 @@ class DragonCard:
 
     def get_steps(self):
         if(self.animal == 5):
-            return -self.card_num%10
+            return -(self.card_num%10)
         return self.card_num%10
     
     def get_animal(self):

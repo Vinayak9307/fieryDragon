@@ -87,9 +87,7 @@ class Game(tk.Tk):
     
     def move_if_match(self,animal,steps):
         p = self.players[self.current_player]
-        # print(animal)
-        print(p.animals_on_path[p.index])
-        if animal == p.animals_on_path[p.index]:
+        if animal == p.animals_on_path[p.index] or animal == 5:
             self.move_current_player(steps)
         else:
             self.canvas.after(1000 , self.skip)

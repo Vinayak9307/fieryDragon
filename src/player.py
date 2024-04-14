@@ -21,14 +21,33 @@ class Player:
         self.game.is_any_player_moving = True
         self.steps = steps
         self.moving = True
-        self.move_step()
+        print(self.steps)
+        if self.steps < 0:
+            self.move_step_backward()
+        else:
+            self.move_step_forward()
+        
+    def move_step_backward(self):
+        print(self.steps)
+        if self.steps < 0:
+            self.index = (self.index - 1)
+            if self.index < 0:
+                self.index = 0
+                self.game.is_any_player_moving = False
+            self.canvas.coords(self.player_token, self.path[self.index][0], self.path[self.index][1])
+            self.steps += 1
+            self.canvas.after(1000 , self.move_step_backward)
+        else:
+            self.game.is_any_player_moving = False
 
-    def move_step(self):
+
+    def move_step_forward(self):
+        print('forward' + str(self.steps))
         if self.steps > 0:
             self.index = (self.index + 1)%len(self.path)
 
             self.canvas.coords(self.player_token, self.path[self.index][0], self.path[self.index][1])
             self.steps -= 1
-            self.canvas.after(1000, self.move_step)
+            self.canvas.after(1000, self.move_step_forward)
         else:
             self.game.is_any_player_moving = False
